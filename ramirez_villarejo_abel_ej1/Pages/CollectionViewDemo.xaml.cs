@@ -1,5 +1,5 @@
 using CollectionViewEjemplo.Models;
-using System.Linq; // Necesario para ordenar
+using System.Linq;
 
 namespace CollectionViewEjemplo.Pages;
 
@@ -10,26 +10,20 @@ public partial class CollectionViewDemo : ContentPage
     public CollectionViewDemo()
     {
         InitializeComponent();
-        listaPersonas = GetCountries(); // Carga los datos en memoria
-        collectionView.ItemsSource = listaPersonas; // Los muestra
+        listaPersonas = GetCountries(); 
+        collectionView.ItemsSource = listaPersonas; 
     }
 
-    // Se ejecuta al pulsar "Ordenar A-Z"
     private void OnOrdenarNombreClicked(object sender, EventArgs e)
     {
-        // 1. Ordenar la lista
         var listaOrdenada = listaPersonas.OrderBy(p => p.PersonaName).ToList();
         collectionView.ItemsSource = listaOrdenada;
-
-        // 2. Cambiar colores para saber que este está activo
         btnNombre.BackgroundColor = Colors.Orange; // Activo
         btnFecha.BackgroundColor = Color.FromArgb("#2B0B98"); // Inactivo
     }
 
-    // Se ejecuta al pulsar "Ordenar por Fecha"
     private void OnOrdenarFechaClicked(object sender, EventArgs e)
     {
-        // 1. Ordenar por fecha (convirtiendo el texto a fecha real)
         var listaOrdenada = listaPersonas.OrderBy(p => 
         {
             if (DateTime.TryParse(p.FechaNacimiento, out DateTime fecha))
@@ -39,9 +33,8 @@ public partial class CollectionViewDemo : ContentPage
 
         collectionView.ItemsSource = listaOrdenada;
 
-        // 2. Cambiar colores para saber que este está activo
-        btnFecha.BackgroundColor = Colors.Orange; // Activo
-        btnNombre.BackgroundColor = Color.FromArgb("#512BD4"); // Inactivo
+        btnFecha.BackgroundColor = Colors.Orange; 
+        btnNombre.BackgroundColor = Color.FromArgb("#512BD4"); 
     }
 
     private List<Persona> GetCountries()
