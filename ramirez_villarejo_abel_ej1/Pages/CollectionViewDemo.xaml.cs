@@ -1,47 +1,48 @@
 using CollectionViewEjemplo.Models;
-using System.Linq; // <--- ¡MUY IMPORTANTE! Necesario para que funcione el 'OrderBy'
+using System.Linq; // Necesario para ordenar
 
 namespace CollectionViewEjemplo.Pages;
 
 public partial class CollectionViewDemo : ContentPage
 {
-    // Variable para guardar la lista original y poder reordenarla
     private List<Persona> listaPersonas;
 
     public CollectionViewDemo()
     {
         InitializeComponent();
-        
-        // Cargamos la lista en la variable
-        listaPersonas = GetCountries();
-        
-        // Se la asignamos a la pantalla
-        collectionView.ItemsSource = listaPersonas;
+        listaPersonas = GetCountries(); // Carga los datos en memoria
+        collectionView.ItemsSource = listaPersonas; // Los muestra
     }
 
-    // --- MÉTODOS QUE TE FALTABAN (Copia esto con cuidado) ---
-
-    // 1. Botón para ordenar por Nombre (A-Z)
+    // Se ejecuta al pulsar "Ordenar A-Z"
     private void OnOrdenarNombreClicked(object sender, EventArgs e)
     {
+        // 1. Ordenar la lista
         var listaOrdenada = listaPersonas.OrderBy(p => p.PersonaName).ToList();
         collectionView.ItemsSource = listaOrdenada;
+
+        // 2. Cambiar colores para saber que este está activo
+        btnNombre.BackgroundColor = Colors.Orange; // Activo
+        btnFecha.BackgroundColor = Color.FromArgb("#2B0B98"); // Inactivo
     }
 
-    // 2. Botón para ordenar por Fecha
+    // Se ejecuta al pulsar "Ordenar por Fecha"
     private void OnOrdenarFechaClicked(object sender, EventArgs e)
     {
+        // 1. Ordenar por fecha (convirtiendo el texto a fecha real)
         var listaOrdenada = listaPersonas.OrderBy(p => 
         {
-            // Intentamos leer la fecha. Si falla, ponemos una fecha muy antigua.
             if (DateTime.TryParse(p.FechaNacimiento, out DateTime fecha))
                 return fecha;
             return DateTime.MinValue;
         }).ToList();
 
         collectionView.ItemsSource = listaOrdenada;
+
+        // 2. Cambiar colores para saber que este está activo
+        btnFecha.BackgroundColor = Colors.Orange; // Activo
+        btnNombre.BackgroundColor = Color.FromArgb("#512BD4"); // Inactivo
     }
-    // ---------------------------------------------------------
 
     private List<Persona> GetCountries()
     {
