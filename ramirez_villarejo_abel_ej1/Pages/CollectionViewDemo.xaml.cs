@@ -1,5 +1,5 @@
 using CollectionViewEjemplo.Models;
-using System.Linq; // Necesario para OrderBy
+using System.Linq; // Necesario para que funcione el OrderBy
 
 namespace CollectionViewEjemplo.Pages;
 
@@ -10,47 +10,45 @@ public partial class CollectionViewDemo : ContentPage
     public CollectionViewDemo()
     {
         InitializeComponent();
-        
-        // 1. Cargamos los datos
+
+        // 1. Cargar datos en memoria
         listaPersonas = GetCountries();
-        
-        // 2. Asignamos la fuente de datos
+
+        // 2. Asignar la lista a la pantalla
         collectionView.ItemsSource = listaPersonas;
     }
 
-    // --- EVENTO CLIC EN UNA PERSONA ---
+    // --- EVENTO: Al hacer CLICK en una persona (Abre la Ficha) ---
     private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        // Verificamos que haya una persona seleccionada (para evitar errores si es null)
+        // Verificamos si se ha seleccionado a alguien válido
         if (e.CurrentSelection.FirstOrDefault() is Persona personaSeleccionada)
         {
-            // Mostramos la alerta con los datos extra
-            await DisplayAlert(
-                $"Ficha de {personaSeleccionada.PersonaName}", // Título
-                $"Puesto: {personaSeleccionada.Trabajo}\n" +      // Mensaje
-                $"Domicilio: {personaSeleccionada.Direccion}\n" +
-                $"Nacimiento: {personaSeleccionada.FechaNacimiento}", 
-                "Entendido");
+            // Navegamos a la página de detalle pasando los datos de la persona
+            // (Asegúrate de haber creado ya el archivo DetallePersonaPage)
+            await Navigation.PushAsync(new DetallePersonaPage(personaSeleccionada));
 
-            // IMPORTANTE: Deseleccionamos el ítem para que se pueda volver a clicar
+            // Deseleccionamos el ítem para que no se quede marcado en gris
             ((CollectionView)sender).SelectedItem = null;
         }
     }
 
-    // --- BOTONES DE ORDENAR ---
+    // --- EVENTO: Botón Ordenar A-Z ---
     private void OnOrdenarNombreClicked(object sender, EventArgs e)
     {
         var listaOrdenada = listaPersonas.OrderBy(p => p.PersonaName).ToList();
         collectionView.ItemsSource = listaOrdenada;
-        
-        // Cambio visual de botones
+
+        // Cambio visual de los botones (Naranja el activo)
         btnNombre.BackgroundColor = Colors.Orange;
         btnFecha.BackgroundColor = Color.FromArgb("#2B0B98");
     }
 
+    // --- EVENTO: Botón Ordenar por Fecha ---
     private void OnOrdenarFechaClicked(object sender, EventArgs e)
     {
-        var listaOrdenada = listaPersonas.OrderBy(p => 
+        // Ordenamos convirtiendo el texto a Fecha real
+        var listaOrdenada = listaPersonas.OrderBy(p =>
         {
             if (DateTime.TryParse(p.FechaNacimiento, out DateTime fecha))
                 return fecha;
@@ -59,12 +57,12 @@ public partial class CollectionViewDemo : ContentPage
 
         collectionView.ItemsSource = listaOrdenada;
 
-        // Cambio visual de botones
+        // Cambio visual de los botones
         btnFecha.BackgroundColor = Colors.Orange;
         btnNombre.BackgroundColor = Color.FromArgb("#512BD4");
     }
 
-    // --- LISTA DE DATOS (Con los campos nuevos rellenos) ---
+    // --- DATOS: Lista de personas con Trabajo y Dirección ---
     private List<Persona> GetCountries()
     {
 		return new List<Persona>
