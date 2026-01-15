@@ -10,23 +10,21 @@ public partial class CollectionViewDemo : ContentPage
 		InitializeComponent();
 		collectionView.ItemsSource = GetCountries();
 	}
-	private List<Country> GetCountries()
+	private List<Persona> GetCountries()
 	{
-		return new List<Country>
+		return new List<Persona>
 		{
-			new Country{PersonaName = "United States",IsoCode="USA",FlagUrl="https://flagcdn.com/w40/us.png"},
-			new Country{PersonaName = "Canada", IsoCode="CAN", FlagUrl="https://flagcdn.com/w40/ca.png"},
-			new Country{PersonaName = "Mexico", IsoCode="MEX", FlagUrl="https://flagcdn.com/w40/mx.png"},
-			new Country{PersonaName = "Spain", IsoCode="ESP", FlagUrl="https://flagcdn.com/w40/es.png"},
-			new Country{PersonaName = "France", IsoCode="FRA", FlagUrl="https://flagcdn.com/w40/fr.png"},
-			new Country{PersonaName = "Germany", IsoCode="DEU", FlagUrl="https://flagcdn.com/w40/de.png"},
-			new Country{PersonaName = "Argentina", IsoCode="ARG", FlagUrl="https://flagcdn.com/w40/ar.png"},
-			new Country{PersonaName = "Brazil", IsoCode="BRA", FlagUrl="https://flagcdn.com/w40/br.png"},
-			new Country{PersonaName = "Japan", IsoCode="JPN", FlagUrl="https://flagcdn.com/w40/jp.png"},
-			new Country{PersonaName = "Australia", IsoCode="AUS", FlagUrl="https://flagcdn.com/w40/au.png"}
-
-
-        };
+			new Persona{PersonaName = "Jose Vicente",PersonaApellidos="Correas Perez",PersonaFoto="https://i.pravatar.cc/150?img=1",fechaNacimiento="12/05/1990"},
+			new Persona{PersonaName = "Mariana", PersonaApellidos="Ramos Flores", PersonaFoto="https://i.pravatar.cc/150?img=2", fechaNacimiento="23/08/1988"},
+			new Persona{PersonaName = "Juan", PersonaApellidos="Gomez Rosas", PersonaFoto="https://i.pravatar.cc/150?img=3", fechaNacimiento="05/11/1992"},
+			new Persona{PersonaName = "Marcos", PersonaApellidos="Nueva Correa", PersonaFoto="https://i.pravatar.cc/150?img=4", fechaNacimiento="30/01/1985"},
+			new Persona{PersonaName = "Elena", PersonaApellidos="Gomez Casas", PersonaFoto="https://i.pravatar.cc/150?img=5", fechaNacimiento="17/07/1994"},
+			new Persona{PersonaName = "El Johnny", PersonaApellidos="Hitler", PersonaFoto="https://i.pravatar.cc/150?img=6", fechaNacimiento="02/02/1979"},
+			new Persona{PersonaName = "Luis", PersonaApellidos="Ramiro Ramos", PersonaFoto="https://i.pravatar.cc/150?img=7", fechaNacimiento="09/09/1991"},
+			new Persona{PersonaName = "Dontalo", PersonaApellidos="Filemon", PersonaFoto="https://i.pravatar.cc/150?img=8", fechaNacimiento="14/04/1987"},
+			new Persona{PersonaName = "Mikasa", PersonaApellidos="Amane", PersonaFoto="https://i.pravatar.cc/150?img=9", fechaNacimiento="21/12/1996"},
+			new Persona{PersonaName = "Tiffanny", PersonaApellidos="Thompsson", PersonaFoto="https://i.pravatar.cc/150?img=10", fechaNacimiento="06/06/1990"}
+		};
 
 	}
 }

@@ -26,17 +26,19 @@
                         </Grid.ColumnDefinitions>
 
                         <Image
-                    Source="{Binding FlagUrl}"
+                    Source="{Binding PersonaFoto}"
                     WidthRequest="40"
                     HeightRequest="30"
                     Aspect="AspectFit"
                     Grid.Column="0" />
 
                         <VerticalStackLayout Grid.Column="1" Padding="10,0" VerticalOptions="Center">
-                            <Label Text="{Binding CountryName}"
+                            <Label Text="{Binding PersonaName}"
                            FontSize="Medium"
                            FontAttributes="Bold" />
-                            <Label Text="{Binding IsoCode}"
+                            <Label Text="{Binding PersonaApellidos}"
+                           FontAttributes="Italic" />
+                           <Label Text="{Binding fechaNacimiento}"
                            FontAttributes="Italic" />
                         </VerticalStackLayout>
                     </Grid>
