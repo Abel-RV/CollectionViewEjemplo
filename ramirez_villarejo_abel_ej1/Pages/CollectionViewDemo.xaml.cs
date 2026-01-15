@@ -1,17 +1,50 @@
 using CollectionViewEjemplo.Models;
+using System.Linq; // <--- ¡MUY IMPORTANTE! Necesario para que funcione el 'OrderBy'
 
 namespace CollectionViewEjemplo.Pages;
 
-
 public partial class CollectionViewDemo : ContentPage
 {
-	public CollectionViewDemo()
-	{
-		InitializeComponent();
-		collectionView.ItemsSource = GetCountries();
-	}
-	private List<Persona> GetCountries()
-	{
+    // Variable para guardar la lista original y poder reordenarla
+    private List<Persona> listaPersonas;
+
+    public CollectionViewDemo()
+    {
+        InitializeComponent();
+        
+        // Cargamos la lista en la variable
+        listaPersonas = GetCountries();
+        
+        // Se la asignamos a la pantalla
+        collectionView.ItemsSource = listaPersonas;
+    }
+
+    // --- MÉTODOS QUE TE FALTABAN (Copia esto con cuidado) ---
+
+    // 1. Botón para ordenar por Nombre (A-Z)
+    private void OnOrdenarNombreClicked(object sender, EventArgs e)
+    {
+        var listaOrdenada = listaPersonas.OrderBy(p => p.PersonaName).ToList();
+        collectionView.ItemsSource = listaOrdenada;
+    }
+
+    // 2. Botón para ordenar por Fecha
+    private void OnOrdenarFechaClicked(object sender, EventArgs e)
+    {
+        var listaOrdenada = listaPersonas.OrderBy(p => 
+        {
+            // Intentamos leer la fecha. Si falla, ponemos una fecha muy antigua.
+            if (DateTime.TryParse(p.FechaNacimiento, out DateTime fecha))
+                return fecha;
+            return DateTime.MinValue;
+        }).ToList();
+
+        collectionView.ItemsSource = listaOrdenada;
+    }
+    // ---------------------------------------------------------
+
+    private List<Persona> GetCountries()
+    {
 		return new List<Persona>
 		{
 			new Persona{PersonaName = "Jose Vicente",PersonaApellidos="Correas Perez",PersonaFoto="https://i.pravatar.cc/150?img=1",FechaNacimiento="12/05/1990"},
