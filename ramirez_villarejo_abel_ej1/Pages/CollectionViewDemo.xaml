@@ -3,50 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CollectionViewEjemplo.Pages.CollectionViewDemo"
              Title="CollectionViewDemo">
-    <CollectionView x:Name="collectionView" ItemsLayout="VerticalGrid" SelectionMode="Single">
-        <!-- <CollectionView.ItemsSource>
-            <x:Array Type="{x:Type x:String}">
-                <x:String>Item 1</x:String>
-                <x:String>Item 2</x:String>
-                <x:String>Item 3</x:String>
-                <x:String>Item 4</x:String>
-                <x:String>Item 5</x:String>
-                <x:String>Item 6</x:String>
-                <x:String>Item 7</x:String>
-            </x:Array>
-        </CollectionView.ItemsSource>
-            -->
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Frame Margin="10" Padding="10">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
 
-                        <Image
-                    Source="{Binding PersonaFoto}"
-                    WidthRequest="40"
-                    HeightRequest="30"
-                    Aspect="AspectFit"
-                    Grid.Column="0" />
+    <Grid RowDefinitions="Auto, *">
+        
+        <HorizontalStackLayout Grid.Row="0" Spacing="10" Padding="10" HorizontalOptions="Center">
+            <Button Text="Ordenar A-Z" 
+                    Clicked="OnOrdenarNombreClicked"
+                    BackgroundColor="Blue" TextColor="White"/>
+            
+            <Button Text="Ordenar por Fecha" 
+                    Clicked="OnOrdenarFechaClicked"
+                    BackgroundColor="DarkBlue" TextColor="White"/>
+        </HorizontalStackLayout>
 
-                        <VerticalStackLayout Grid.Column="1" Padding="10,0" VerticalOptions="Center">
-                            <Label Text="{Binding PersonaName}"
-                           FontSize="Medium"
-                           FontAttributes="Bold" />
-                            <Label Text="{Binding PersonaApellidos}"
-                           FontAttributes="Italic" />
-                           <Label Text="{Binding FechaNacimiento}"
-                           FontAttributes="Italic" />
-                        </VerticalStackLayout>
-                    </Grid>
-                </Frame>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
+        <CollectionView x:Name="collectionView" 
+                        Grid.Row="1" 
+                        ItemsLayout="VerticalGrid, 2" 
+                        SelectionMode="Single">
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="10" Padding="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-    </CollectionView>
-    
+                            <Image Source="{Binding PersonaFoto}"
+                                   WidthRequest="40"
+                                   HeightRequest="30"
+                                   Aspect="AspectFit"
+                                   Grid.Column="0" />
+
+                            <VerticalStackLayout Grid.Column="1" Padding="10,0" VerticalOptions="Center">
+                                <Label Text="{Binding PersonaName}"
+                                       FontSize="Medium"
+                                       FontAttributes="Bold" />
+                                <Label Text="{Binding PersonaApellidos}"
+                                       FontAttributes="Italic" />
+                                <Label Text="{Binding FechaNacimiento}"
+                                       FontAttributes="Italic" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 
 </ContentPage>
