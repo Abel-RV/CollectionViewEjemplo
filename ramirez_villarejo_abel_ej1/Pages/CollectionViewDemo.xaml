@@ -5,6 +5,7 @@
              Title="CollectionViewDemo">
 
     <Grid RowDefinitions="Auto, *">
+
         <HorizontalStackLayout Grid.Row="0" Spacing="10" Padding="10" HorizontalOptions="Center">
             <Button x:Name="btnNombre"
                     Text="Ordenar A-Z" 
@@ -22,7 +23,8 @@
         <CollectionView x:Name="collectionView" 
                         Grid.Row="1" 
                         ItemsLayout="VerticalList" 
-                        SelectionMode="Single">
+                        SelectionMode="Single"
+                        SelectionChanged="OnSelectionChanged">
             
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -38,9 +40,11 @@
                                 <Label Text="{Binding PersonaName}"
                                        FontSize="16"
                                        FontAttributes="Bold" />
+                                
                                 <Label Text="{Binding PersonaApellidos}"
                                        FontSize="14"
                                        TextColor="Gray" />
+                                
                                 <Label Text="{Binding FechaNacimiento}"
                                        FontSize="12"
                                        FontAttributes="Italic" />
@@ -51,4 +55,5 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </Grid>
+
 </ContentPage>

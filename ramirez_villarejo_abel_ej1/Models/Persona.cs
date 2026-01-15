@@ -8,6 +8,10 @@ namespace CollectionViewEjemplo.Models
         public string PersonaFoto { get; set; }
 
         public string FechaNacimiento { get; set; }
+
+        public string Direccion { get; set; }
+        public string Trabajo { get; set; }
+        public string Telefono { get; set; }
     
     }
 }
