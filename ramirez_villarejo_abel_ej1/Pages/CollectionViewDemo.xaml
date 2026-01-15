@@ -38,7 +38,7 @@
                            FontAttributes="Bold" />
                             <Label Text="{Binding PersonaApellidos}"
                            FontAttributes="Italic" />
-                           <Label Text="{Binding fechaNacimiento}"
+                           <Label Text="{Binding FechaNacimiento}"
                            FontAttributes="Italic" />
                         </VerticalStackLayout>
                     </Grid>

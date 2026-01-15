@@ -7,7 +7,7 @@ namespace CollectionViewEjemplo.Models
         public string PersonaApellidos { get; set; }
         public string PersonaFoto { get; set; }
 
-        public string fechaNacimiento { get; set; }
+        public string FechaNacimiento { get; set; }
     
     }
 }
