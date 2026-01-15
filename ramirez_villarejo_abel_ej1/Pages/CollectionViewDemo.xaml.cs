@@ -1,5 +1,5 @@
 using CollectionViewEjemplo.Models;
-using System.Linq; // Necesario para que funcione el OrderBy
+using System.Linq;
 
 namespace CollectionViewEjemplo.Pages;
 
@@ -11,29 +11,20 @@ public partial class CollectionViewDemo : ContentPage
     {
         InitializeComponent();
 
-        // 1. Cargar datos en memoria
         listaPersonas = GetCountries();
-
-        // 2. Asignar la lista a la pantalla
         collectionView.ItemsSource = listaPersonas;
     }
-
-    // --- EVENTO: Al hacer CLICK en una persona (Abre la Ficha) ---
     private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         // Verificamos si se ha seleccionado a alguien válido
         if (e.CurrentSelection.FirstOrDefault() is Persona personaSeleccionada)
         {
-            // Navegamos a la página de detalle pasando los datos de la persona
-            // (Asegúrate de haber creado ya el archivo DetallePersonaPage)
             await Navigation.PushAsync(new DetallePersonaPage(personaSeleccionada));
 
-            // Deseleccionamos el ítem para que no se quede marcado en gris
             ((CollectionView)sender).SelectedItem = null;
         }
     }
 
-    // --- EVENTO: Botón Ordenar A-Z ---
     private void OnOrdenarNombreClicked(object sender, EventArgs e)
     {
         var listaOrdenada = listaPersonas.OrderBy(p => p.PersonaName).ToList();
@@ -43,8 +34,6 @@ public partial class CollectionViewDemo : ContentPage
         btnNombre.BackgroundColor = Colors.Orange;
         btnFecha.BackgroundColor = Color.FromArgb("#2B0B98");
     }
-
-    // --- EVENTO: Botón Ordenar por Fecha ---
     private void OnOrdenarFechaClicked(object sender, EventArgs e)
     {
         // Ordenamos convirtiendo el texto a Fecha real
@@ -62,7 +51,6 @@ public partial class CollectionViewDemo : ContentPage
         btnNombre.BackgroundColor = Color.FromArgb("#512BD4");
     }
 
-    // --- DATOS: Lista de personas con Trabajo y Dirección ---
     private List<Persona> GetCountries()
     {
 		return new List<Persona>
