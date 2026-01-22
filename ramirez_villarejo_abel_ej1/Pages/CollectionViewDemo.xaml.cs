@@ -14,14 +14,13 @@ public partial class CollectionViewDemo : ContentPage
         listaPersonas = GetCountries();
         collectionView.ItemsSource = listaPersonas;
     }
-    private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void OnVerDetallesClicked(object sender, EventArgs e)
     {
-        // Verificamos si se ha seleccionado a alguien válido
-        if (e.CurrentSelection.FirstOrDefault() is Persona personaSeleccionada)
+        var button = sender as Button;
+
+        if (button != null && button.BindingContext is Persona personaSeleccionada)
         {
             await Navigation.PushAsync(new DetallePersonaPage(personaSeleccionada));
-
-            ((CollectionView)sender).SelectedItem = null;
         }
     }
 
@@ -29,8 +28,6 @@ public partial class CollectionViewDemo : ContentPage
     {
         var listaOrdenada = listaPersonas.OrderBy(p => p.PersonaName).ToList();
         collectionView.ItemsSource = listaOrdenada;
-
-        // Cambio visual de los botones (Naranja el activo)
         btnNombre.BackgroundColor = Colors.Orange;
         btnFecha.BackgroundColor = Color.FromArgb("#2B0B98");
     }
@@ -71,7 +68,7 @@ public partial class CollectionViewDemo : ContentPage
 			new Persona{PersonaName = "Diego", PersonaApellidos="Ortiz Salas", PersonaFoto="https://i.pravatar.cc/150?img=14", FechaNacimiento="15/08/1989", Direccion="Calle Rio 11, León", Trabajo="Chef", Telefono="+34 600 123 014"},
 			new Persona{PersonaName = "Sofía", PersonaApellidos="Vega Castillo", PersonaFoto="https://i.pravatar.cc/150?img=15", FechaNacimiento="07/01/1995", Direccion="Avenida Mar 22, Santander", Trabajo="Psicóloga", Telefono="+34 600 123 015"},
 			new Persona{PersonaName = "Miguel", PersonaApellidos="Herrera Navarro", PersonaFoto="https://i.pravatar.cc/150?img=16", FechaNacimiento="22/11/1987", Direccion="Calle Pino 9, Lugo", Trabajo="Médico", Telefono="+34 600 123 016"},
-			new Persona{PersonaName = "Isabel", PersonaApellidos="Rubio Morales", PersonaFoto="https://i.pravatar.cc/150?img=17", FechaNacimiento="03/05/1990", Direccion="Calle Serrano 15, Madrid", Trabajo="Arquitecta", Telefono="+34 600 123 017"},
+			new Persona{PersonaName = "Isamel", PersonaApellidos="Rubio Morales", PersonaFoto="https://i.pravatar.cc/150?img=17", FechaNacimiento="03/05/1990", Direccion="Calle Serrano 15, Madrid", Trabajo="Arquitecta", Telefono="+34 600 123 017"},
 			new Persona{PersonaName = "Pablo", PersonaApellidos="Soto Ibáñez", PersonaFoto="https://i.pravatar.cc/150?img=18", FechaNacimiento="19/09/1992", Direccion="Avenida Norte 20, Bilbao", Trabajo="Periodista", Telefono="+34 600 123 018"},
 			new Persona{PersonaName = "Natalia", PersonaApellidos="Cruz Molina", PersonaFoto="https://i.pravatar.cc/150?img=19", FechaNacimiento="26/12/1994", Direccion="Calle Lirio 13, Cádiz", Trabajo="Farmacéutica", Telefono="+34 600 123 019"},
 			new Persona{PersonaName = "Óscar", PersonaApellidos="Beltrán Ruiz", PersonaFoto="https://i.pravatar.cc/150?img=20", FechaNacimiento="08/06/1983", Direccion="Plaza Real 17, Logroño", Trabajo="Consultor", Telefono="+34 600 123 020"},
