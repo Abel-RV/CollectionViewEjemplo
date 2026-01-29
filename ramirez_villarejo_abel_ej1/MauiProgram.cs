@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CollectionViewEjemplo.Pages;
+using Microsoft.Extensions.Logging;
+using CollectionViewEjemplo.Pages;
 
 namespace CollectionViewEjemplo
 {
@@ -14,8 +16,10 @@ namespace CollectionViewEjemplo
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-
-            builder.Services.AddTransient < MainPage>();
+            builder.Services.AddSingleton<LocalDbService>();
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<CollectionViewDemo>();
+            builder.Services.AddTransient<DetallePersonaPage>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

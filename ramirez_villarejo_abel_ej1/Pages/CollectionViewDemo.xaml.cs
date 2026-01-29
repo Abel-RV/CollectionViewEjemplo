@@ -6,12 +6,33 @@ namespace CollectionViewEjemplo.Pages;
 public partial class CollectionViewDemo : ContentPage
 {
     private List<Persona> listaPersonas;
+    private readonly LocalDbService _localDbService;
 
-    public CollectionViewDemo()
+    public CollectionViewDemo(LocalDbService localDbService)
     {
         InitializeComponent();
 
-        listaPersonas = GetCountries();
+        _localDbService = localDbService;
+        listaPersonas = GetPersonas();
+        collectionView.ItemsSource = listaPersonas;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await CargarDatos();
+    }
+
+    private async Task CargarDatos()
+    {
+        listaPersonas = await _localDbService.GetPersonas();
+        if (listaPersonas.Count == 0)
+        {
+            var datosIniciales = GetPersonas();
+            await _localDbService.SeedDataAsync(datosIniciales);
+            listaPersonas = await _localDbService.GetPersonas();
+        }
+
         collectionView.ItemsSource = listaPersonas;
     }
     private async void OnVerDetallesClicked(object sender, EventArgs e)
@@ -33,7 +54,6 @@ public partial class CollectionViewDemo : ContentPage
     }
     private void OnOrdenarFechaClicked(object sender, EventArgs e)
     {
-        // Ordenamos convirtiendo el texto a Fecha real
         var listaOrdenada = listaPersonas.OrderBy(p =>
         {
             if (DateTime.TryParse(p.FechaNacimiento, out DateTime fecha))
@@ -43,12 +63,11 @@ public partial class CollectionViewDemo : ContentPage
 
         collectionView.ItemsSource = listaOrdenada;
 
-        // Cambio visual de los botones
         btnFecha.BackgroundColor = Colors.Orange;
         btnNombre.BackgroundColor = Color.FromArgb("#512BD4");
     }
 
-    private List<Persona> GetCountries()
+    private List<Persona> GetPersonas()
     {
 		return new List<Persona>
 		{
