@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CollectionViewEjemplo
 {
-    internal class LocalDbService
+    public class LocalDbService
     {
         private const string DB_NAME = "demo_local_db.db3";
-        private readonly SQLiteAsyncConnection _connection;
+        private readonly SQLite.SQLiteAsyncConnection _connection;
     }
 }
