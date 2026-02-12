@@ -4,10 +4,10 @@ namespace CollectionViewEjemplo
 {
     public partial class App : Application
     {
-        public App()
+        public App(CollectionViewDemo mainPage)
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new CollectionViewDemo());
+            MainPage = new NavigationPage(mainPage);
 
         }
 

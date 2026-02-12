@@ -5,9 +5,6 @@
         public AppShell()
         {
             InitializeComponent();
-            MainPage = new AppShell();
         }
-
-        public AppShell MainPage { get; }
     }
 }
